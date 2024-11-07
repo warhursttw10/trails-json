@@ -41,15 +41,8 @@
         ]
      },
      {
-        "type":"checkbox",
-        "name":"length",
-        "options":[
-           "0-3 Miles",
-           "3-6 Miles",
-           "6-9 Miles",
-           "9-12 Miles",
-           "12+ Miles"
-        ]
+        "type":"text",
+        "name":"length"
      },
      {
         "type":"toggle",

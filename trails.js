@@ -90,6 +90,23 @@ export function saveToStorage(trails) {
     localStorage.setItem('trails', JSON.stringify(trails));
 }
 
+/* this function gets called from another event listener function i have attached to a button
+* I want it to download a json file with the data from the trails object
+*/
+export function downloadJSON() {
+    const trails = JSON.parse(localStorage.getItem('trails'));
+    const data = JSON.stringify(trails);
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const event = new MouseEvent('click');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    a.dispatchEvent(event);
+    URL.revokeObjectURL(url);
+}
+
+
 export async function initializePage() {
     await loadFromStorage();
 }

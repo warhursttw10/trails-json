@@ -5,10 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trail</title>
     <script type="module" src="editTrail.js" defer></script>
+    <style>
+        /* add some basic styles to make a form look nice */
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        /* hide the form by default */
+        .js-edit-trail {
+            display: none;
+        }
+
+        /* show the form when the class is added */
+        .js-edit-trail.is-visible {
+            display: block;
+        }
+
+        
+        
+
+
+    </style>
 </head>
 <body>
     <div class="js-edit-trail">
-        
+        <form action="">
+            <fieldset>
+                <legend></legend>
+                <label for="">
+                    <input type="text">
+                </label>
+            </fieldset>
+            <fieldset><legend>communities</legend><label>Boulder Junction<input type="checkbox" value="Boulder Junction" name="communities"></label><label>Conover<input type="checkbox" value="Conover" name="communities"></label><label>Eagle River<input type="checkbox" value="Eagle River" name="communities"></label><label>Lac du Flambeau<input type="checkbox" value="Lac du Flambeau" name="communities"></label><label>Land O’ Lakes<input type="checkbox" value="Land O’ Lakes" name="communities"></label><label>Manitowish Waters<input type="checkbox" value="Manitowish Waters" name="communities"></label><label>Minocqua Area<input type="checkbox" value="Minocqua Area" name="communities"></label><label>Phelps<input type="checkbox" value="Phelps" name="communities"></label><label>Presque Isle<input type="checkbox" value="Presque Isle" name="communities"></label><label>Sayner-Star Lake<input type="checkbox" value="Sayner-Star Lake" name="communities"></label><label>St. Germain<input type="checkbox" value="St. Germain" name="communities"></label><label>Winchester<input type="checkbox" value="Winchester" name="communities"></label></fieldset>
+        </form>
     </div>
 </body>
 </html>
