@@ -1,0 +1,75 @@
+{"filters" : [
+   {
+      "type":"text",
+      "name":"title"
+   },  
+   {
+        "type":"checkbox",
+        "name":"communities",
+        "options":[
+           "Boulder Junction",
+           "Conover",
+           "Eagle River",
+           "Lac du Flambeau",
+           "Land O’ Lakes",
+           "Manitowish Waters",
+           "Minocqua Area",
+           "Phelps",
+           "Presque Isle",
+           "Sayner-Star Lake",
+           "St. Germain",
+           "Winchester"
+        ]
+     },
+     {
+        "type":"checkbox",
+        "name":"activities",
+        "options":[
+           "ATVing/UTVing",
+           "Biking",
+           "Biking (Winter)",
+           "Birdwatching",
+           "Cross-country Skiing",
+           "Equestrian",
+           "Hiking",
+           "Hunting",
+           "Off-Highway Motorcycling",
+           "Paddling",
+           "Snowmobiling",
+           "Snowshoeing",
+           "Swimming"
+        ]
+     },
+     {
+        "type":"checkbox",
+        "name":"length",
+        "options":[
+           "0-3 Miles",
+           "3-6 Miles",
+           "6-9 Miles",
+           "9-12 Miles",
+           "12+ Miles"
+        ]
+     },
+     {
+        "type":"toggle",
+        "name":"pets"
+     },
+     {
+        "type":"toggle",
+        "name":"fee"
+     },
+     {
+        "type":"toggle",
+        "name":"waterViews"
+     },
+     {
+        "type":"toggle",
+        "name":"bikeRepair"
+     },
+     {
+        "type":"toggle",
+        "name":"accessibility"
+     }
+  ]
+}
