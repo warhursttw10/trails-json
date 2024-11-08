@@ -75,6 +75,7 @@ function generateForm(fields, trailID) {
         }
     });
 
+    // create submit button
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Submit';
     submitButton.addEventListener('click', (event) => {
