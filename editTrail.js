@@ -1,7 +1,5 @@
 import { saveToStorage } from './trails.js';
 
-const trailID = new URLSearchParams(window.location.search).get('id');
-
 function getTrailByID(id) {
    const trails = JSON.parse(localStorage.getItem('trails'));
     console.log(trails[id]);
@@ -24,7 +22,8 @@ export async function fetchJSONData() {
 }
 
 // generate form based on trail data and prepopulate with trail data
-function generateForm(fields, trail) {
+function generateForm(fields, trailID) {
+    const trail = getTrailByID(trailID);
     const form = document.createElement('form');
     form.id = 'editTrailForm';
 
@@ -126,6 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const data = await fetchJSONData();
     // generate form fields
     
+    const trailID = new URLSearchParams(window.location.search).get('id');
 
-    generateForm(data, getTrailByID(trailID));
+    generateForm(data, trailID);
 });
