@@ -111,3 +111,4 @@ export async function initializePage() {
     await loadFromStorage();
 }
 
+console.log('trails.js loaded');
