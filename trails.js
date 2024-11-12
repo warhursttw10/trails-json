@@ -112,5 +112,3 @@ export async function initializePage() {
 }
 
 console.log('trails.js loaded');
-console.log('hello from main');
-console.log('trying revert');
