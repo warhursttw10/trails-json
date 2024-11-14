@@ -1,6 +1,10 @@
 import { saveToStorage } from './trails.js';
 
 function getTrailByID(id) {
+    if (!id) {
+        return null;
+    }
+
    const trails = JSON.parse(localStorage.getItem('trails'));
     console.log(trails[id]);
     return trails[id];
@@ -43,7 +47,7 @@ function generateForm(fields, trailID) {
         if (field.type === 'text') {
             input.type = 'text';
             input.name = field.name;
-            input.value = trail[field.name];
+            input.value = trail ? trail[field.name] ?? '' : '';
             label.appendChild(input);
             fieldset.appendChild(label);
             form.appendChild(fieldset);
@@ -56,7 +60,7 @@ function generateForm(fields, trailID) {
                 optionInput.type = 'checkbox';
                 optionInput.value = option;
                 optionInput.name = field.name;
-                optionInput.checked = trail[field.name].map(value => value.toLowerCase()).includes(option.toLowerCase());
+                optionInput.checked = trail ? trail[field.name].map(value => value.toLowerCase()).includes(option.toLowerCase()) : false;
                 const optionLabel = document.createElement('label');
                 optionLabel.textContent = option;
                 optionLabel.appendChild(optionInput);
@@ -68,10 +72,24 @@ function generateForm(fields, trailID) {
             input.type = 'checkbox';
             input.name = field.name;
 
-            input.checked = trail[field.name];
+            input.checked = trail ? trail[field.name] : false;
             label.appendChild(input);
             fieldset.appendChild(label);
             form.appendChild(fieldset);
+        }
+        if(field.type === 'object') {
+            console.log(field);
+            field.options.forEach(option => {
+                const optionInput = document.createElement('input');
+                optionInput.type = 'text';
+                optionInput.value = trail ? trail[field.name][option] ?? '' : '';
+                optionInput.name = option;
+                const optionLabel = document.createElement('label');
+                optionLabel.textContent = option;
+                optionLabel.appendChild(optionInput);
+                fieldset.appendChild(optionLabel);
+                form.appendChild(fieldset);
+            });
         }
     });
 
@@ -82,7 +100,7 @@ function generateForm(fields, trailID) {
         // prevent form from submitting
         event.preventDefault();
 
-        editTrail(trail);
+        editTrail(trailID);
     });
 
     form.appendChild(submitButton);
@@ -90,7 +108,7 @@ function generateForm(fields, trailID) {
 }
 
 
-function editTrail(trail) {
+function editTrail(trailID) {
     const form = document.getElementById('editTrailForm');
     const formData = new FormData(form);
     
@@ -105,18 +123,40 @@ function editTrail(trail) {
         title: formData.get('title'),
         communities: formData.getAll('communities'),
         activities: formData.getAll('activities'),
-        length: formData.get('length').split(','),
+        length: formData.get('length').split(',').map(Number),
         pets: formData.get('pets') !== null,
         accessibility: formData.get('accessibility') !== null,
         fee: formData.get('fee') !== null,
-        bikeRepair: formData.get('bikeRepair')!== null,
-        waterViews: formData.get('waterViews') !== null
+        bikeRepair: formData.get('bikeRepair') !== null,
+        waterViews: formData.get('waterViews') !== null,
+        filename: formData.get('filename'),
+        image: formData.get('image'),
+        spatialReference: formData.get('spatialReference')
     };
+
+    const xMin = formData.get('xMin');
+    const xMax = formData.get('xMax');
+    const yMin = formData.get('yMin');
+    const yMax = formData.get('yMax');
+
+    if (xMin && xMax && yMin && yMax) {
+        updatedTrail.bounds = {
+            xMin: Number(xMin),
+            xMax: Number(xMax),
+            yMin: Number(yMin),
+            yMax: Number(yMax)
+        };
+    }
 
     console.log(updatedTrail);
 
     const trails = JSON.parse(localStorage.getItem('trails'));
-    trails[trailID] = updatedTrail;
+    if(trailID) {
+        trails[trailID] = updatedTrail;
+    } else {
+        trails.push(updatedTrail);
+    }
+    
     saveToStorage(trails);
     location.href = 'index.html';
 }

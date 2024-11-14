@@ -63,6 +63,23 @@
      {
         "type":"toggle",
         "name":"accessibility"
+     },
+     {
+      "type":"text",
+      "name":"filename"
+     },
+     {
+      "type":"text",
+      "name":"image"
+     },
+     {
+      "type":"text",
+      "name":"spatialReference"
+     },
+     {
+      "type":"object",
+      "name":"bounds",
+      "options": [ "xMin", "yMin", "xMax", "yMax" ]
      }
   ]
 }

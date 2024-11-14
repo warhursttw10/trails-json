@@ -16,7 +16,7 @@ export function generateTrailTable(data) {
 
     const header = table.createTHead();
     const headerRow = header.insertRow(0);
-    const headers = ['Title', 'Communities', 'Activities', 'Length', 'Pets', 'Accessibility', 'Fee', 'Bike Repair', 'Water Views'];
+    const headers = ['Title', 'Communities', 'Activities', 'Length', 'Pets', 'Accessibility', 'Fee', 'Bike Repair', 'Water Views', 'Bounds', 'Filename', 'Image', 'Reference'];
     headers.forEach((header, index) => {
         const cell = headerRow.insertCell(index);
         cell.textContent = header;
@@ -34,7 +34,11 @@ export function generateTrailTable(data) {
             trail.accessibility ? 'true' : 'false',
             trail.fee ? 'true' : 'false',
             trail.bikeRepair ? 'true' : 'false',
-            trail.waterViews ? 'true' : 'false'
+            trail.waterViews ? 'true' : 'false',
+            trail.bounds ? Object.entries(trail.bounds).map(([key, value]) => `${key}: ${value}`).join(', ') : '',
+            trail.filename,
+            trail.image,
+            trail.spatialReference
         ];
         cells.forEach((cellData, index) => {
             const cell = row.insertCell(index);
@@ -87,6 +91,7 @@ export async function loadFromStorage() {
 }
 
 export function saveToStorage(trails) {
+    trails.sort((a, b) => a.title.localeCompare(b.title));
     localStorage.setItem('trails', JSON.stringify(trails));
 }
 
